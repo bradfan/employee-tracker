@@ -1,0 +1,24 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "Github Deploy Link: https://bradfan.github.io/employee-tracker/",
+  "main": "employeeDBConnection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradfan/employee-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradfan/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/bradfan/employee-tracker#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "my-sql": "^1.2.15"
+  }
+}
