@@ -83,26 +83,38 @@ function addDepartment(){
   inquirer.prompt([{
     type: "input",
     name: "department",
-    message: "What Department would you like to add?"
-  },
-  {
-    type: "input",
-    name: "price",
-    message: "How much does it cost?"
-  },{
-    type: "input",
-    name: "quantity",
-    message: "How many do you have?"
+    message: "What Department would you like to add? (A Department ID number will be added for you)"
   }]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO products (flavor, price, quantity) VALUES (?, ?, ?);";
-    const foo = connection.query(query, [response.flavor, response.price, response.quantity], function(err, data){
-      console.log("Added flavor", response.flavor);
-      console.log(foo.sql);
+    const query = "INSERT INTO department (department) VALUES (?);";
+    const dept = connection.query(query, [response.dept_name], function(err, data){
+      console.log("Added dept:", response.dept_name);
+      console.log(dept.sql);
       init();
     })
   })
 }
+function addRole(){
+  inquirer.prompt([{
+    type: "input",
+    name: "title",
+    message: "What is the title of the Role would you like to add?"
+  },
+  {
+    type: "input",
+    name: "salary",
+    message: "What is the annual salary of this new role?"
+  }]).then(function(response){
+    console.log(response);
+    const query = "INSERT INTO emp_role (title, salary) VALUES (?, ?);";
+    const job = connection.query(query, [response.title, response.salary], function(err, data){
+      console.log("Added role:", response.title, response.salary);
+      console.log(job.sql);
+      init();
+    })
+  })
+}
+// question to self - ask for a dept id or assign one in mysql? role_id will play a part in the addEmployee function as well. Think about this before JOIN starts coming into play.
 
 // function addDepartment(){
 //   inquirer.prompt([{
