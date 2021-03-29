@@ -138,7 +138,7 @@ function addEmployee(){
   }
 ]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO products (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
+    const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
     const emp = connection.query(query, [response.first_name, response.last_name, response.role_id, response.manager_id], function(err, data){
       console.log("Added employee", response.emp);
       console.log(emp.sql);
@@ -146,3 +146,55 @@ function addEmployee(){
     })
   })
 }
+function updateEmployee(){
+  inquirer.prompt([{
+    type: "list",
+    name: "first_name",
+    message: "What would you like to update?",
+    choices: ["The employee's first name",
+        "The employee's last name",
+        "The employee's role id",
+        "The ID of the manager the employee reports to",
+        "Exit"
+  ]
+  }]).then (function(response){
+      switch(response.whatToDo){
+          case "The employee's first name":
+          updateFirstName();
+          break;
+          case "The employee's last name":
+          updateLastName();
+          break;
+          case "The employee's role id":
+          updateRoleId();
+          break;
+          case "The ID of the manager the employee reports to":
+          updateManagerId();
+          default:
+          connection.end();
+      }
+  }
+  // {
+  //   type: "input",
+  //   name: "last_name",
+  //   message: "What is the employee's last name?"
+  // },{
+  //   type: "input",
+  //   name: "role_id",
+  //   message: "What is the role ID associated with this employee's position?"
+  // },
+  // {
+  //   type: "input",
+  //   name: "manager_id",
+  //   message: "What is the ID of the manager this employee reports to?"
+  // }
+// ]).then(function(response){
+//     console.log(response);
+//     const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
+//     const emp = connection.query(query, [response.first_name, response.last_name, response.role_id, response.manager_id], function(err, data){
+//       console.log("Added employee", response.emp);
+//       console.log(emp.sql);
+//       init();
+//     })
+//   })
+// }
