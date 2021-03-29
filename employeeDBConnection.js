@@ -116,27 +116,33 @@ function addRole(){
 }
 // question to self - ask for a dept id or assign one in mysql? role_id will play a part in the addEmployee function as well. Think about this before JOIN starts coming into play.
 
-// function addDepartment(){
-//   inquirer.prompt([{
-//     type: "input",
-//     name: "department",
-//     message: "What Department would you like to add?"
-//   },
-//   {
-//     type: "input",
-//     name: "price",
-//     message: "How much does it cost?"
-//   },{
-//     type: "input",
-//     name: "quantity",
-//     message: "How many do you have?"
-//   }]).then(function(response){
-//     console.log(response);
-//     const query = "INSERT INTO products (flavor, price, quantity) VALUES (?, ?, ?);";
-//     const foo = connection.query(query, [response.flavor, response.price, response.quantity], function(err, data){
-//       console.log("Added flavor", response.flavor);
-//       console.log(foo.sql);
-//       init();
-//     })
-//   })
-// }
+function addEmployee(){
+  inquirer.prompt([{
+    type: "input",
+    name: "first_name",
+    message: "What is the employee's first name?"
+  },
+  {
+    type: "input",
+    name: "last_name",
+    message: "What is the employee's last name?"
+  },{
+    type: "input",
+    name: "role_id",
+    message: "What is the role ID associated with this employee's position?"
+  },
+  {
+    type: "input",
+    name: "manager_id",
+    message: "What is the ID of the manager this employee reports to?"
+  }
+]).then(function(response){
+    console.log(response);
+    const query = "INSERT INTO products (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
+    const emp = connection.query(query, [response.first_name, response.last_name, response.role_id, response.manager_id], function(err, data){
+      console.log("Added employee", response.emp);
+      console.log(emp.sql);
+      init();
+    })
+  })
+}
