@@ -1,4 +1,5 @@
 const connection = require("./db");
+const inquirer = require("inquirer");
 
 function init(){
   inquirer.prompt([{
@@ -85,7 +86,7 @@ function addRole(){
   {
     type: "input",
     name: "salary",
-    message: "What is the annual salary of this new role?"
+    message: "What is the annual Salary of this new Role?"
   }]).then(function(response){
     console.log(response);
     const query = "INSERT INTO emp_role (title, salary) VALUES (?, ?);";

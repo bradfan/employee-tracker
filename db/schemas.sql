@@ -33,4 +33,4 @@ CREATE TABLE employee (
 
 
 
--- ### Alternative way to insert more than one row
+
