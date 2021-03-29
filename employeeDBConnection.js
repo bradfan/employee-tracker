@@ -156,8 +156,7 @@ function updateEmployee(){
         "The employee's role id",
         "The ID of the manager the employee reports to",
         "Exit"
-  ]
-  }]).then (function(response){
+  ]}]).then (function(response){
       switch(response.whatToDo){
           case "The employee's first name":
           updateFirstName();
@@ -173,7 +172,8 @@ function updateEmployee(){
           default:
           connection.end();
       }
-  }
+  })
+}
   // {
   //   type: "input",
   //   name: "last_name",
