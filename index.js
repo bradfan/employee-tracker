@@ -86,7 +86,7 @@ function addDepartment(){
 function addRole(){
   inquirer.prompt([{
     type: "input",
-    name: "role_id",
+    name: "id",
     message: "What ID# would you like to give this new role?"
   },
   {
@@ -102,13 +102,15 @@ function addRole(){
   {
     type: "input",
     name: "department_id",
-    message: "What is the Dpartment ID# of this new role?"
-  }]).then(function(response){
+    message: "What is the existing Department ID# to add to this new role?"
+  }
+]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO emp_role (role_id,title, salary,department_id) VALUES (?,?,?,?);";
-    const job = connection.query(query, [response.id, response.title, response.salary,response.department_id], function(err, data){
+    const question = "INSERT INTO emp_role (id, title, salary, department_id) VALUES (?,?,?,?);";
+    const job = connection.query(question, [response.id, response.title, response.salary,response.department_id], function(err, data){
+      if(err) throw err;
       console.log("Added role:", response.id, response.title, response.salary, response.department_id);
-      console.log(job.sql);
+      console.table(job.sql);
       init();
     })
   })
@@ -152,8 +154,8 @@ function addEmployee(){
 function updateEmployeeRole(){
   inquirer.prompt([{
      type: "input",
-     name:"employee",
-     message: "What is the ID# of the employee you wish to update?"
+     name:"last_name",
+     message: "What is the last name of the employee you wish to update?"
   },
     {
     type: "input",
@@ -161,9 +163,8 @@ function updateEmployeeRole(){
     message: "What is this employee's new role ID#?"
   }]).then(function(response){
     console.log(response);
-    connection.query = "INSERT INTO employee (role_id) VALUES (?);";
-    // SELECT role_id INSERT INTO employee ON employee.role_id"
-    const newRole = connection.query(query, [response.role_id], function(err, data){
+    const burrito = "UPDATE employee SET (role_id) WHERE (last_name)  VALUES (?);";
+    const newRole = connection.query(burrito, [response.role_id], function(err, data){
       console.log("Added new role:", response.role_id);
       console.log(newRole.sql);
       init();
