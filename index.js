@@ -136,13 +136,18 @@ function addEmployee(){
 }
 function updateEmployeeRole(){
   inquirer.prompt([{
+     type: "input",
+     name:"employee",
+     message: "What is the ID# of the employee you wish to update?"
+  },
+    {
     type: "input",
-    name: "new_role",
-    message: "What is this employee's new role ID#"
+    name: "role_id",
+    message: "What is this employee's new role ID#?"
   }]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO employee (role_id) VALUES (?);";
-    const newRole = connection.query(query, [response.role-id], function(err, data){
+    connection.query = "INSERT INTO employee (role_id) VALUES (?);";
+    const newRole = connection.query(query, [response.role_id], function(err, data){
       console.log("Added new role:", response.role_id);
       console.log(newRole.sql);
       init();
