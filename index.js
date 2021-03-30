@@ -66,13 +66,18 @@ function viewEmployees(){
 function addDepartment(){
   inquirer.prompt([{
     type: "input",
-    name: "department",
-    message: "What Department would you like to add? (A Department ID number will be added for you)"
+    name: "id",
+    message: "What ID would you like to give this new Department?"
+  },
+  {
+    type: "input",
+    name: "dept_name",
+    message: "What name would you like to give this new Department?"
   }]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO department (department) VALUES (?);";
-    const dept = connection.query(query, [response.dept_name], function(err, data){
-      console.log("Added dept:", response.dept_name);
+    const query = "INSERT INTO department (id,dept_name) VALUES (?,?);";
+    const dept = connection.query(query, [response.id, response.dept_name], function(err, data){
+      console.log("Added dept:", response.id, response.dept_name);
       console.log(dept.sql);
       init();
     })
@@ -81,6 +86,11 @@ function addDepartment(){
 function addRole(){
   inquirer.prompt([{
     type: "input",
+    name: "role_id",
+    message: "What ID# would you like to give this new role?"
+  },
+  {
+    type: "input",
     name: "title",
     message: "What is the title of the Role would you like to add?"
   },
@@ -88,11 +98,16 @@ function addRole(){
     type: "input",
     name: "salary",
     message: "What is the annual Salary of this new Role?"
+  },
+  {
+    type: "input",
+    name: "department_id",
+    message: "What is the Dpartment ID# of this new role?"
   }]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO emp_role (title, salary) VALUES (?, ?);";
-    const job = connection.query(query, [response.title, response.salary], function(err, data){
-      console.log("Added role:", response.title, response.salary);
+    const query = "INSERT INTO emp_role (role_id,title, salary,department_id) VALUES (?,?,?,?);";
+    const job = connection.query(query, [response.id, response.title, response.salary,response.department_id], function(err, data){
+      console.log("Added role:", response.id, response.title, response.salary, response.department_id);
       console.log(job.sql);
       init();
     })
@@ -147,6 +162,7 @@ function updateEmployeeRole(){
   }]).then(function(response){
     console.log(response);
     connection.query = "INSERT INTO employee (role_id) VALUES (?);";
+    // SELECT role_id INSERT INTO employee ON employee.role_id"
     const newRole = connection.query(query, [response.role_id], function(err, data){
       console.log("Added new role:", response.role_id);
       console.log(newRole.sql);
