@@ -1,5 +1,6 @@
 const connection = require("./db");
 const inquirer = require("inquirer");
+init();
 
 function init(){
   inquirer.prompt([{
@@ -51,13 +52,13 @@ function viewDepartments(){
   })
 }
 function viewRoles(){
-  connection.query("SELECT * FROM emp_role", function(err, data){
+  connection.query("SELECT emp_role.id, emp_role.title, emp_role.salary, department.dept_name FROM emp_role INNER JOIN department ON emp_role.department_id=department.id", function(err, data){
     console.table(data);
     init();
   })
 }
 function viewEmployees(){
-  connection.query("SELECT * FROM employee", function(err, data){
+  connection.query("SELECT employee.id,employee.first_name, employee.last_name, emp_role.title, department.dept_name, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN emp_role ON emp_role.id=employee.role_id LEFT JOIN department ON emp_role.department_id=department.id LEFT JOIN employee manager ON manager.id=employee.manager_id", function(err, data){
     console.table(data);
     init();
   })
@@ -97,7 +98,6 @@ function addRole(){
     })
   })
 }
-// question to self - ask for a dept id or assign one in mysql? role_id will play a part in the addEmployee function as well. Think about this before JOIN starts coming into play.
 
 function addEmployee(){
   inquirer.prompt([{
@@ -121,6 +121,11 @@ function addEmployee(){
   }
 ]).then(function(response){
     console.log(response);
+    if (response.manager_id == '') {
+      // they dont have a manager
+    } else {
+      // they do
+    }
     const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
     const emp = connection.query(query, [response.first_name, response.last_name, response.role_id, response.manager_id], function(err, data){
       console.log("Added employee", response.emp);

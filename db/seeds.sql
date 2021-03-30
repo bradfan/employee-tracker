@@ -34,16 +34,16 @@ VALUES ("Manager", 70000, 5);
 
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Bob", "Loblaw", 101, 10);
+VALUES ("Bob", "Loblaw", 1, 5);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Jimmy", "Page", 202, 20);
+VALUES ("Jimmy", "Page", 2, 5);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("John", "Bonham", 303, 30 );
+VALUES ("John", "Bonham", 3, 5);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Robert", "Plant",404,40);
+VALUES ("Robert", "Plant",4,5);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("John Paul", "Jones", 505, 50);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("John Paul", "Jones", 5 );
