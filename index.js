@@ -67,7 +67,7 @@ function addDepartment(){
   inquirer.prompt([{
     type: "input",
     name: "id",
-    message: "What ID would you like to give this new Department?"
+    message: "What new ID would you like to give this new Department?"
   },
   {
     type: "input",
@@ -139,10 +139,8 @@ function addEmployee(){
 ]).then(function(response){
     console.log(response);
     if (response.manager_id == '') {
-      // they dont have a manager
-    } else {
-      // they do
-    }
+        role.id === 5
+    } 
     const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
     const emp = connection.query(query, [response.first_name, response.last_name, response.role_id, response.manager_id], function(err, data){
       console.log("Added employee", response.emp);
@@ -165,8 +163,9 @@ function updateEmployeeRole(){
     console.log(response);
     const burrito = "UPDATE employee SET (role_id) WHERE (last_name)  VALUES (?);";
     const newRole = connection.query(burrito, [response.role_id], function(err, data){
+      if (err) throw err
       console.log("Added new role:", response.role_id);
-      console.log(newRole.sql);
+      console.log("What happened: ",newRole.sql);
       init();
     })
   })
