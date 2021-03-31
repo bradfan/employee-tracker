@@ -1,7 +1,7 @@
 
-Github Deploy Link: https://bradfan.github.io/employee-tracker/
+Github Repo Link: https://github.com/bradfan/employee-tracker
 
-Video Link:
+Video Link:  https://youtu.be/bdUG785V1qM
 
 This is built for a business owner to be able to view and manage the departments, roles, and employees in their company so that they can organize and plan their business. This a command line application that allows the user to:
 * ### Add departments, roles and employees.
